@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gk_company">
+
+<insert id="insert" parameterType="cc.javaee.bbs.model.Company" >
+    insert into gk_company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="zsname != null" >
+        zsname,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="zsname != null" >
+        #{zsname,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="queryIndexList" resultType="cc.javaee.bbs.model.Company">
+	 SELECT 
+	  * 
+	FROM
+	  gk_company order by id desc limit 0 , 10;  
+  </select>
+  
+  <!-- 查询总条数 -->
+  <select id="findpagecount" resultType="java.lang.Integer" parameterType="cc.javaee.bbs.model.Company" >
+    select  count(*) 
+    from 
+    	gk_company
+  </select>
+  
+  <!-- 分页查询 -->
+  <select id="findpage" resultType="cc.javaee.bbs.model.Company" parameterType="cc.javaee.bbs.model.Company" >
+    SELECT 
+   	  *
+	FROM
+	  gk_company
+    <!-- 页面排序使用 -->
+	ORDER BY id desc
+    LIMIT ${pageNo}, ${pageSize}
+  </select>
+  
+</mapper>
